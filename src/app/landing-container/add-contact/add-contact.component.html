@@ -1,38 +1,51 @@
-<div class="col-md-10">
+<div class="col-md-12">
   <h1 class="h1">Add contact</h1>
-  <form class="form-horizontal">
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="firstname">First name: </label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="firstname" placeholder="Enter first name">
-      </div>
-    </div>
+  <form #addContactForm="ngForm" class="form-horizontal addcontactform" (ngSubmit)="addContactForm.valid && AddContact()" novalidate>
 
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="lastname">Last name: </label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="lastname" placeholder="Enter first name">
-      </div>
-    </div>
+    <div class="form-group" [ngClass]="{ 'has-error': addContactForm.submitted && !firstname.valid || addContactForm.submitted && !lastname.valid || addContactForm.submitted && !telephonenumber.valid || addContactForm.submitted && !address.valid}">
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="firstname">First name: </label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Enter first name" [(ngModel)]="model.firstname" #firstname="ngModel" required maxLength="50" pattern="[a-zA-Z]+"> 
+          
+          
 
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="telephonenumber">Telephone number: </label>
-      <div class="col-sm-10">
-        <input type="number" class="form-control" id="telephonenumber" placeholder="Enter telephone number">
+        </div>
+        <span class="col-sm-3" *ngIf="addContactForm.submitted && !firstname.valid" class="help-block">Firstname is required</span>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="address">Address: </label>
-      <div class="col-sm-10">
-        <textarea class="form-control" id="address" placeholder="Enter address"></textarea>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="lastname">Last name: </label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Enter first name" [(ngModel)]="model.lastname" #lastname="ngModel" required maxLength="50" pattern="[a-zA-Z]+">
+           
+
+        </div>
+        <span class="col-sm-3" *ngIf="addContactForm.submitted && !lastname.valid" class="help-block">Lastname is required</span>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="telephonedirectory">Telephone directory: </label>
-      <div class="col-sm-10">
-        <select class="form-control" id="telephonedirectory">
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="telephonenumber">Telephone number: </label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control" name="telephonenumber" id="telephonenumber" placeholder="Enter telephone number" [(ngModel)]="model.telephonenumber" #telephonenumber="ngModel" required maxLength="10" pattern="[0-9]{10}" >
+          
+        </div>
+        <span class="col-sm-3" *ngIf="addContactForm.submitted && !telephonenumber.valid" class="help-block">Valid telephone number is required</span>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="address">Address: </label>
+        <div class="col-sm-7">
+          <textarea class="form-control" name="address" id="address" placeholder="Enter address" [(ngModel)]="model.address" #address="ngModel" required maxLength="200" pattern="[a-zA-Z0-9]+"></textarea>
+           
+        </div>
+        <span class="col-sm-3" *ngIf="addContactForm.submitted && !address.valid" class="help-block">Address is required</span>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="telephonedirectory">Telephone directory: </label>
+        <div class="col-sm-7">
+          <select class="form-control" id="telephonedirectory" required>
                     <option>--Select--</option>
 
           <option>Directory 1</option>
@@ -40,14 +53,16 @@
           <option>Directory 3</option>
           <option>Directory 4</option>
         </select>
+        </div>
       </div>
-    </div>
 
 
 
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-primary">Save contact</button>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+         
+          <button type="submit" name="add-contact-submit" id="add-contact-submit" class="btn btn-primary" value="Submit">Save contact</button>
+        </div>
       </div>
     </div>
   </form>

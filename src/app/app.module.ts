@@ -37,8 +37,11 @@ export const MENU_ROUTES: Routes = [
 ];
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  
+  
   { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+
 
   { path: 'landing-container', component: LandingContainerComponent, children: MENU_ROUTES },
 

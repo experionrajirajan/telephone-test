@@ -15,14 +15,15 @@ export class LoginComponent implements OnInit {
 userName;
 Password;
 userDetails;
+model: any= {};
   constructor(private router: Router, private loginService: LoginService) {
 
    }
 
-  OnSignIn(form: NgForm) {
+  OnSignIn() {
 
-this.userName=form.value.username; 
-this.Password=form.value.password
+this.userName= this.model.username; 
+this.Password= this.model.password;
 
    
     this.loginService.Login(this.userName,this.Password);
